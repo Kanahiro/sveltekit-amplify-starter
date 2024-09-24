@@ -1,38 +1,17 @@
-# create-svelte
+# sveltekit-amplify-starter
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+SvelteKit + Amplify Gen2 (Hosting, Backend)
 
-## Creating a project
+## usage
 
-If you're seeing this, you've probably already done this step. Congrats!
+1. Copy or Fork this repository
+2. Connect repository to Amplify in the Amplify Console
+3. Done
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## tips
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- Server Side Rendering (SSR) works good but streaming does not work.
 
-## Developing
+## references
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- <https://docs.aws.amazon.com/amplify/latest/userguide/get-started-sveltekit.html>
