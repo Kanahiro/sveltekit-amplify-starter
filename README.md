@@ -5,7 +5,7 @@ SvelteKit + Amplify Gen2 (Hosting, Backend)
 ## usage
 
 1. Copy or Fork this repository
-2. Connect repository to Amplify in the Amplify Console
+2. Connect your repository in the Amplify Console
 3. Done
 
 ## tips
