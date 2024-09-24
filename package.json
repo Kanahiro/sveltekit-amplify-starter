@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"sandbox": "ampx sandbox",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -28,5 +29,8 @@
 		"vite": "^5.0.3",
 		"vitest": "^2.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"aws-amplify": "^6.6.2"
+	}
 }
