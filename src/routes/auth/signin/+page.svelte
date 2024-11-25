@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { signIn, signUp } from 'aws-amplify/auth';
+	import Authenticator from '$lib/sveltekit-amplify/Authenticator.svelte';
 
 	let signupInput = $state({
 		email: '',
@@ -74,3 +75,5 @@ signin
 	bind:value={signinInput.password}
 />
 <button onclick={handleSignIn}>Submit</button>
+
+<Authenticator />

@@ -4,11 +4,12 @@ import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { createRunWithAmplifyServerContext } from '$lib/sveltekit-amplify/index.js';
 
 import outputs from '../amplify_outputs.json';
+import { sequence } from '@sveltejs/kit/hooks';
 
 // init auth-checker with outputs once when the server starts
 const runWithAmplifyServerContext = createRunWithAmplifyServerContext(outputs);
 
-export const handle: Handle = async ({ event, resolve }): Promise<Response> => {
+const amplify: Handle = async ({ event, resolve }): Promise<Response> => {
 	if (!event.url.pathname.startsWith('/private')) {
 		return resolve(event);
 	}
@@ -36,3 +37,17 @@ export const handle: Handle = async ({ event, resolve }): Promise<Response> => {
 		return resolve(event);
 	}
 };
+
+const authGuard: Handle = async ({ event, resolve }) => {
+	if (!event.locals.session && event.url.pathname.startsWith('/private')) {
+		redirect(303, '/auth/signin');
+	}
+
+	if (event.locals.session && event.url.pathname === '/auth/signin') {
+		redirect(303, '/private');
+	}
+
+	return resolve(event);
+};
+
+export const handle: Handle = sequence(amplify, authGuard);
