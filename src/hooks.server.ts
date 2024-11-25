@@ -1,7 +1,7 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 import { fetchAuthSession } from 'aws-amplify/auth/server';
 
-import { createRunWithAmplifyServerContext } from '$lib/adapter-sveltekit';
+import { createRunWithAmplifyServerContext } from '$lib/sveltekit-amplify/index.js';
 
 import outputs from '../amplify_outputs.json';
 

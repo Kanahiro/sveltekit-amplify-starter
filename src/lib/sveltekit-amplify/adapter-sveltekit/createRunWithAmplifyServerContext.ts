@@ -9,8 +9,8 @@ import {
 } from 'aws-amplify/adapter-core';
 import { sharedInMemoryStorage, parseAmplifyConfig } from 'aws-amplify/utils';
 
-import { createTokenValidator } from './createTokenValidator';
-import { createCookieStorage } from './createCookieStorage';
+import { createTokenValidator } from './createTokenValidator.js';
+import { createCookieStorage } from './createCookieStorage.js';
 
 type RunWithAmplifyServerContextOptions = {
 	event: RequestEvent | null;

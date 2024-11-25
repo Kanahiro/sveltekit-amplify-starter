@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { isValidCognitoToken } from './isValidCognitoToken';
+import { isValidCognitoToken } from './isValidCognitoToken.js';
 
 interface CreateTokenValidatorInput {
 	userPoolId?: string;

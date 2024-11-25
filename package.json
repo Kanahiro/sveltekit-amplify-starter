@@ -1,5 +1,5 @@
 {
-	"name": "next",
+	"name": "sveltekit-amplify-starter",
 	"version": "0.0.1",
 	"scripts": {
 		"sandbox": "ampx sandbox",

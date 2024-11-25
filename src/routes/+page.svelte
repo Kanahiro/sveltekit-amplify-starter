@@ -1,3 +1,3 @@
 root page
 
-<a href="/signin">Sign In</a>
+<a href="/auth/signin">Sign In</a>

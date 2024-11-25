@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { signIn, signUp, signOut } from 'aws-amplify/auth';
+	import { signIn, signUp } from 'aws-amplify/auth';
 
 	let signupInput = $state({
 		email: '',
@@ -55,7 +55,7 @@ signup
 	required
 	bind:value={signupInput.password}
 />
-<button on:click={handleSignUp}>Submit</button>
+<button onclick={handleSignUp}>Submit</button>
 signin
 <input
 	type="text"
@@ -73,8 +73,4 @@ signin
 	required
 	bind:value={signinInput.password}
 />
-<button on:click={handleSignIn}>Submit</button>
-
-<form method="POST" action="?/signOut">
-	<button type="submit">Sign Out</button>
-</form>
+<button onclick={handleSignIn}>Submit</button>
