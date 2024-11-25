@@ -4,7 +4,7 @@
 	"scripts": {
 		"sandbox": "ampx sandbox",
 		"dev": "vite dev",
-		"build": "vite build && npm run package",
+		"build": "vite build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
