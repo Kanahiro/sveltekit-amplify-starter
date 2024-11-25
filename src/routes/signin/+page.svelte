@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { signIn, signUp, signOut } from 'aws-amplify/auth';
 
-	let signupInput = {
+	let signupInput = $state({
 		email: '',
 		password: ''
-	};
+	});
 
-	let signinInput = {
+	let signinInput = $state({
 		email: '',
 		password: ''
-	};
+	});
 
 	const handleSignUp = async () => {
 		try {

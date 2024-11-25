@@ -1,38 +1,70 @@
 {
-	"name": "sveltekit-amplify-starter",
+	"name": "next",
 	"version": "0.0.1",
-	"private": true,
 	"scripts": {
 		"sandbox": "ampx sandbox",
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "vite build && npm run package",
 		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "vitest",
-		"lint": "eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"test:unit": "vitest",
+		"test": "npm run test:unit -- --run"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
-		"@aws-amplify/backend": "^1.3.0",
-		"@aws-amplify/backend-cli": "^1.2.8",
+		"@aws-amplify/backend": "^1.8.0",
+		"@aws-amplify/backend-cli": "^1.4.2",
+		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"@types/eslint": "^9.6.0",
-		"amplify-adapter": "^0.1.2",
-		"aws-amplify": "^6.6.4",
+		"@sveltejs/package": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"amplify-adapter": "^0.2.0",
+		"autoprefixer": "^10.4.20",
 		"aws-jwt-verify": "^4.0.1",
-		"eslint": "^9.0.0",
+		"eslint": "^9.7.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
-		"prettier": "^3.3.3",
-		"prettier-plugin-svelte": "^3.2.7",
-		"svelte": "^4.2.7",
+		"prettier": "^3.3.2",
+		"prettier-plugin-svelte": "^3.2.6",
+		"prettier-plugin-tailwindcss": "^0.6.5",
+		"publint": "^0.2.0",
+		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
+		"tailwindcss": "^3.4.9",
+		"tsx": "^4.19.2",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0",
-		"vite": "^5.0.3",
-		"vitest": "^2.0.0"
+		"vite": "^5.0.11",
+		"vitest": "^2.0.4"
 	},
-	"type": "module"
+	"dependencies": {
+		"@tailwindcss/forms": "^0.5.9",
+		"@tailwindcss/typography": "^0.5.15",
+		"aws-amplify": "^6.9.0"
+	}
 }
