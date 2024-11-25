@@ -10,10 +10,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 const runWithAmplifyServerContext = createRunWithAmplifyServerContext(outputs);
 
 const amplify: Handle = async ({ event, resolve }): Promise<Response> => {
-	if (!event.url.pathname.startsWith('/private')) {
-		return resolve(event);
-	}
-
 	const authenticated = await runWithAmplifyServerContext({
 		event,
 		operation: async (contextSpec) => {
@@ -31,23 +27,14 @@ const amplify: Handle = async ({ event, resolve }): Promise<Response> => {
 		}
 	});
 
-	if (!authenticated) {
-		redirect(303, '/');
-	} else {
-		return resolve(event);
-	}
-};
-
-const authGuard: Handle = async ({ event, resolve }) => {
-	if (!event.locals.session && event.url.pathname.startsWith('/private')) {
+	if (!authenticated && event.url.pathname.startsWith('/private')) {
 		redirect(303, '/auth/signin');
 	}
-
-	if (event.locals.session && event.url.pathname === '/auth/signin') {
+	if (authenticated && event.url.pathname === '/auth/signin') {
 		redirect(303, '/private');
 	}
 
 	return resolve(event);
 };
 
-export const handle: Handle = sequence(amplify, authGuard);
+export const handle: Handle = sequence(amplify);
