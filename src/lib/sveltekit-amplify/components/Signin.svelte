@@ -6,6 +6,20 @@
 	let errorMessage = $state('');
 
 	let loading = $state(false);
+	let mode = $state<
+		| 'default'
+		| 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE'
+		| 'CONFIRM_SIGN_IN_WITH_EMAIL_CODE'
+		| 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED'
+		| 'CONFIRM_SIGN_IN_WITH_SMS_CODE'
+		| 'CONFIRM_SIGN_IN_WITH_TOTP_CODE'
+		| 'CONFIRM_SIGN_UP'
+		| 'CONTINUE_SIGN_IN_WITH_EMAIL_SETUP'
+		| 'CONTINUE_SIGN_IN_WITH_MFA_SELECTION'
+		| 'CONTINUE_SIGN_IN_WITH_MFA_SETUP_SELECTION'
+		| 'CONTINUE_SIGN_IN_WITH_TOTP_SETUP'
+		| 'RESET_PASSWORD'
+	>('default');
 
 	const {
 		callback
@@ -18,8 +32,13 @@
 		loading = true;
 		errorMessage = '';
 		try {
-			const user = await signIn({ username: email, password });
-			callback && (await callback());
+			const res = await signIn({ username: email, password });
+
+			if (res.nextStep.signInStep === 'DONE') {
+				callback && (await callback());
+			} else {
+				mode = res.nextStep.signInStep;
+			}
 		} catch (error: any) {
 			errorMessage = error.message || 'Login failed. Please try again.';
 		}

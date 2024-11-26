@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Signin from './AuthenticatorSignin.svelte';
-	import Signup from './AuthenticatorSignup.svelte';
+	import Signin from './Signin.svelte';
+	import Signup from './Signup.svelte';
 
 	const {
 		callbackSignin,
