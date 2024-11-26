@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ResetPassword from './ResetPassword.svelte';
 	import Signin from './Signin.svelte';
 	import Signup from './Signup.svelte';
 
@@ -10,7 +11,7 @@
 		callbackSignup?: () => Promise<void>;
 	} = $props();
 
-	let mode = $state<'signin' | 'signup'>('signin');
+	let mode = $state<'signin' | 'signup' | 'resetpassword'>('signin');
 </script>
 
 <div class="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-md">
@@ -35,6 +36,21 @@
 	</div>
 	{#if mode === 'signin'}
 		<Signin callback={callbackSignin} />
+		<!-- forgot password -->
+		<div class="text-sm text-center">
+			<button
+				class="text-indigo-600 hover:underline"
+				onclick={async () => {
+					mode = 'resetpassword';
+				}}>Forgot your password?</button
+			>
+		</div>
+	{:else if mode === 'resetpassword'}
+		<ResetPassword
+			callback={async () => {
+				mode = 'signin';
+			}}
+		/>
 	{:else}
 		<Signup callback={callbackSignup} />
 	{/if}

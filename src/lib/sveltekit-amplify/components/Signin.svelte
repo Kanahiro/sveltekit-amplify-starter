@@ -1,25 +1,11 @@
 <script lang="ts">
 	import { signIn } from 'aws-amplify/auth';
 
-	let email = $state('');
+	let username = $state('');
 	let password = $state('');
 	let errorMessage = $state('');
 
 	let loading = $state(false);
-	let mode = $state<
-		| 'default'
-		| 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE'
-		| 'CONFIRM_SIGN_IN_WITH_EMAIL_CODE'
-		| 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED'
-		| 'CONFIRM_SIGN_IN_WITH_SMS_CODE'
-		| 'CONFIRM_SIGN_IN_WITH_TOTP_CODE'
-		| 'CONFIRM_SIGN_UP'
-		| 'CONTINUE_SIGN_IN_WITH_EMAIL_SETUP'
-		| 'CONTINUE_SIGN_IN_WITH_MFA_SELECTION'
-		| 'CONTINUE_SIGN_IN_WITH_MFA_SETUP_SELECTION'
-		| 'CONTINUE_SIGN_IN_WITH_TOTP_SETUP'
-		| 'RESET_PASSWORD'
-	>('default');
 
 	const {
 		callback
@@ -32,12 +18,13 @@
 		loading = true;
 		errorMessage = '';
 		try {
-			const res = await signIn({ username: email, password });
+			const res = await signIn({ username, password });
 
 			if (res.nextStep.signInStep === 'DONE') {
 				callback && (await callback());
 			} else {
-				mode = res.nextStep.signInStep;
+				// TODO
+				return;
 			}
 		} catch (error: any) {
 			errorMessage = error.message || 'Login failed. Please try again.';
@@ -46,7 +33,7 @@
 	}
 </script>
 
-<form onsubmit={handleSignin} class="space-y-4">
+<form class="space-y-4" onsubmit={handleSignin}>
 	<h2 class="text-2xl font-bold text-center text-gray-800">Signin</h2>
 	<!-- Email Input -->
 	<div>
@@ -54,7 +41,7 @@
 		<input
 			id="email"
 			type="email"
-			bind:value={email}
+			bind:value={username}
 			class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 			placeholder="Enter your email"
 			required
@@ -92,10 +79,5 @@
 				Sign In
 			{/if}
 		</button>
-	</div>
-	<!-- forgot password -->
-	<div class="text-sm text-center">
-		<a href="/auth/forgot-password" class="text-indigo-600 hover:underline">Forgot your password?</a
-		>
 	</div>
 </form>
