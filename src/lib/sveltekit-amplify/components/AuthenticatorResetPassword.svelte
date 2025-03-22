@@ -1,24 +1,26 @@
 <script lang="ts">
 	import { resetPassword, confirmResetPassword } from 'aws-amplify/auth';
 
-	let { callback }: { callback?: () => Promise<void> } = $props();
+	let { onresetpassword }: { onresetpassword?: () => Promise<void> } = $props();
 
-	let mode = $state<'default' | 'confirm'>('default');
+	let mode = $state<'default' | 'CONFIRM_RESET_PASSWORD_WITH_CODE'>('default');
 
 	let username = $state('');
 	let newPassword = $state('');
 	let confirmNewPassword = $state('');
 	let confirmationCode = $state('');
 
-	async function handleForget() {
+	async function handleForget(e: Event) {
+		e.preventDefault();
 		try {
 			const res = await resetPassword({
 				username
 			});
-
 			if (res.nextStep.resetPasswordStep === 'CONFIRM_RESET_PASSWORD_WITH_CODE') {
-				mode = 'confirm';
+				mode = 'CONFIRM_RESET_PASSWORD_WITH_CODE';
 				return;
+			} else if (res.nextStep.resetPasswordStep === 'DONE') {
+				onresetpassword && (await onresetpassword());
 			}
 		} catch (error) {
 			console.error(error);
@@ -28,14 +30,12 @@
 
 	async function handleConfirm() {
 		try {
-			const res = await confirmResetPassword({
+			await confirmResetPassword({
 				username,
 				newPassword,
 				confirmationCode
 			});
-			console.log(res);
-
-			callback && (await callback());
+			onresetpassword && (await onresetpassword());
 		} catch (error) {
 			console.error(error);
 			// handle error
@@ -73,7 +73,7 @@
 			Reset Password
 		</button>
 	</form>
-{:else if mode === 'confirm'}
+{:else if mode === 'CONFIRM_RESET_PASSWORD_WITH_CODE'}
 	<form onsubmit={handleConfirm} class="space-y-4">
 		<h2 class="text-2xl font-bold text-center text-gray-800">Confirm Signup</h2>
 		<div>

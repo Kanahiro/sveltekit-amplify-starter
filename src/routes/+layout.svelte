@@ -4,5 +4,9 @@
 	import outputs from '../../amplify_outputs.json';
 </script>
 
+<svelte:head>
+	<title>SvelteKit + Amplify Gen2</title>
+</svelte:head>
+
 <AmplifyInit {outputs} />
 <slot />

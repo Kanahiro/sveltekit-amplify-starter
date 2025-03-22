@@ -8,9 +8,9 @@
 	let loading = $state(false);
 
 	const {
-		callback
+		onsignin
 	}: {
-		callback?: () => Promise<void>;
+		onsignin?: () => Promise<void>;
 	} = $props();
 
 	// ログイン処理
@@ -21,7 +21,7 @@
 			const res = await signIn({ username, password });
 
 			if (res.nextStep.signInStep === 'DONE') {
-				callback && (await callback());
+				onsignin && (await onsignin());
 			} else {
 				// TODO
 				return;
@@ -70,7 +70,7 @@
 	<div>
 		<button
 			type="submit"
-			class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+			class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 			disabled={loading}
 		>
 			{#if loading}

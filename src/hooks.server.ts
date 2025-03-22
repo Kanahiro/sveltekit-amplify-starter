@@ -28,9 +28,9 @@ const amplify: Handle = async ({ event, resolve }): Promise<Response> => {
 	});
 
 	if (!authenticated && event.url.pathname.startsWith('/private')) {
-		redirect(303, '/auth/signin');
+		redirect(303, '/auth');
 	}
-	if (authenticated && event.url.pathname === '/auth/signin') {
+	if (authenticated && event.url.pathname === '/auth') {
 		redirect(303, '/private');
 	}
 
