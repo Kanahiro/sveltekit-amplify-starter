@@ -16,6 +16,7 @@ SvelteKit + Amplify Gen2 (Hosting, Backend)
 ## references
 
 - <https://docs.aws.amazon.com/amplify/latest/userguide/get-started-sveltekit.html>
+- <https://github.com/gzimbron/amplify-adapter>
 
 ## development
 
@@ -24,3 +25,7 @@ npm install
 npm run sandbox
 npm run dev
 ```
+
+## license
+
+MIT

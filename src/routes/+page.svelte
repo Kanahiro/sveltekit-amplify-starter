@@ -50,7 +50,7 @@
 			<p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
 				This is a starter template for SvelteKit and AWS Amplify, built to demonstrate
 				authentication flow on server-side rendering (SSR) of SvelteKit. You can easily start to use
-				following steps.
+				with few steps as below.
 			</p>
 		</div>
 	</section>
