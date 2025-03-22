@@ -13,7 +13,8 @@
 		onsignup?: () => Promise<void>;
 	} = $props();
 
-	async function handleSignup() {
+	async function handleSignup(e: Event) {
+		e.preventDefault();
 		try {
 			const res = await signUp({
 				username,
@@ -31,7 +32,8 @@
 		}
 	}
 
-	async function handleConfirmSignup() {
+	async function handleConfirmSignup(e: Event) {
+		e.preventDefault();
 		try {
 			await confirmSignUp({ username, confirmationCode });
 			onsignup && (await onsignup());

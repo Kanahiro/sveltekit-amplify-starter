@@ -28,7 +28,8 @@
 		}
 	}
 
-	async function handleConfirm() {
+	async function handleConfirm(e: Event) {
+		e.preventDefault();
 		try {
 			await confirmResetPassword({
 				username,

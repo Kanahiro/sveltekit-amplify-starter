@@ -14,7 +14,8 @@
 	} = $props();
 
 	// ログイン処理
-	async function handleSignin() {
+	async function handleSignin(e: Event) {
+		e.preventDefault();
 		loading = true;
 		errorMessage = '';
 		try {
