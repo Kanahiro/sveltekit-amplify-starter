@@ -27,7 +27,7 @@
 			</div>
 		</div>
 
-		<div class="bg-white shadow rounded-lg p-6">
+		<div class="bg-white shadow-sm rounded-lg p-6">
 			<h2 class="text-xl font-semibold mb-4">Session Data passed from server</h2>
 
 			{#if data.session}
@@ -36,7 +36,7 @@
 						<h3 class="font-medium">Complete Session Object</h3>
 					</div>
 					<div class="p-4">
-						<pre class="bg-gray-100 p-3 rounded text-sm block whitespace-pre-wrap overflow-x-auto">
+						<pre class="bg-gray-100 p-3 rounded-sm text-sm block whitespace-pre-wrap overflow-x-auto">
 							{JSON.stringify(data.session, null, 2)}
 						</pre>
 					</div>
@@ -49,7 +49,7 @@
 								<h3 class="font-medium">{key}</h3>
 							</div>
 							<div class="p-4">
-								<code class="bg-gray-100 p-2 rounded text-sm block whitespace-pre-wrap">
+								<code class="bg-gray-100 p-2 rounded-sm text-sm block whitespace-pre-wrap">
 									{typeof value === 'object' ? JSON.stringify(value, null, 2) : value}
 								</code>
 							</div>

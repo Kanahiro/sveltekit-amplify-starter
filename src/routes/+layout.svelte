@@ -10,10 +10,10 @@
 
 <AmplifyInit {outputs} />
 
-<header class="bg-white bg-opacity-90 shadow-sm py-4">
+<header class="bg-white bg-opacity-90 shadow-xs py-4">
 	<div class="container mx-auto px-4">
 		<div class="flex justify-between items-center">
-			<div class="flex-shrink-0">
+			<div class="shrink-0">
 				<a class="text-blue-600 font-bold text-xl" href="/">SvelteKit Amplify Starter</a>
 			</div>
 			<div class="flex space-x-6 items-center">

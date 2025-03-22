@@ -8,7 +8,7 @@
 	});
 </script>
 
-<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+<div class="min-h-screen bg-linear-to-b from-blue-50 to-white">
 	<!-- Hero Section -->
 	<section class="py-12 md:py-20">
 		<div class="container mx-auto px-4">
@@ -25,7 +25,7 @@
 					<div class="flex flex-col sm:flex-row justify-center gap-4">
 						<a
 							href="/auth"
-							class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+							class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
 						>
 							Get Started
 						</a>
@@ -33,7 +33,7 @@
 							href="https://docs.aws.amazon.com/amplify/latest/userguide/get-started-sveltekit.html"
 							target="_blank"
 							rel="noopener noreferrer"
-							class="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg shadow-md hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+							class="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg shadow-md hover:bg-gray-50 transition-colors focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
 						>
 							Learn More
 						</a>
