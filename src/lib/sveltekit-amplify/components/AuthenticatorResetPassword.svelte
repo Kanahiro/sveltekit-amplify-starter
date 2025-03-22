@@ -1,24 +1,26 @@
 <script lang="ts">
 	import { resetPassword, confirmResetPassword } from 'aws-amplify/auth';
 
-	let { callback }: { callback?: () => Promise<void> } = $props();
+	let { onresetpassword }: { onresetpassword?: () => Promise<void> } = $props();
 
-	let mode = $state<'default' | 'confirm'>('default');
+	let mode = $state<'default' | 'CONFIRM_RESET_PASSWORD_WITH_CODE'>('default');
 
 	let username = $state('');
 	let newPassword = $state('');
 	let confirmNewPassword = $state('');
 	let confirmationCode = $state('');
 
-	async function handleForget() {
+	async function handleForget(e: Event) {
+		e.preventDefault();
 		try {
 			const res = await resetPassword({
 				username
 			});
-
 			if (res.nextStep.resetPasswordStep === 'CONFIRM_RESET_PASSWORD_WITH_CODE') {
-				mode = 'confirm';
+				mode = 'CONFIRM_RESET_PASSWORD_WITH_CODE';
 				return;
+			} else if (res.nextStep.resetPasswordStep === 'DONE') {
+				onresetpassword && (await onresetpassword());
 			}
 		} catch (error) {
 			console.error(error);
@@ -28,14 +30,12 @@
 
 	async function handleConfirm() {
 		try {
-			const res = await confirmResetPassword({
+			await confirmResetPassword({
 				username,
 				newPassword,
 				confirmationCode
 			});
-			console.log(res);
-
-			callback && (await callback());
+			onresetpassword && (await onresetpassword());
 		} catch (error) {
 			console.error(error);
 			// handle error
@@ -60,7 +60,7 @@
 					id="username"
 					type="text"
 					bind:value={username}
-					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-hidden focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					placeholder="Enter your username"
 					required
 				/>
@@ -68,12 +68,12 @@
 		</div>
 		<button
 			type="submit"
-			class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+			class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 		>
 			Reset Password
 		</button>
 	</form>
-{:else if mode === 'confirm'}
+{:else if mode === 'CONFIRM_RESET_PASSWORD_WITH_CODE'}
 	<form onsubmit={handleConfirm} class="space-y-4">
 		<h2 class="text-2xl font-bold text-center text-gray-800">Confirm Signup</h2>
 		<div>
@@ -83,7 +83,7 @@
 					id="code"
 					type="text"
 					bind:value={confirmationCode}
-					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-hidden focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					placeholder="Enter your code"
 					required
 				/>
@@ -96,7 +96,7 @@
 					id="newPassword"
 					type="password"
 					bind:value={newPassword}
-					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-hidden focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					placeholder="Enter your new password"
 					required
 				/>
@@ -109,7 +109,7 @@
 					id="confirmNewPassword"
 					type="password"
 					bind:value={confirmNewPassword}
-					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+					class="block w-full px-3 py-2 mt-1 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:outline-hidden focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					placeholder="Confirm your new password"
 					required
 				/>
@@ -119,7 +119,7 @@
 			{/if}
 			<button
 				type="submit"
-				class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 			>
 				Confirm Signup
 			</button>
