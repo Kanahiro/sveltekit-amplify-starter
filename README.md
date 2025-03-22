@@ -1,6 +1,13 @@
 # sveltekit-amplify-starter
 
+![](./authenticator.png)
+
 SvelteKit + Amplify Gen2 (Hosting, Backend)
+
+## features
+
+- Authentication flow on Server-side rendering (SSR)
+- Utility components for Amplify and authentication
 
 ## usage
 
