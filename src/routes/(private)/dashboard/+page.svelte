@@ -6,7 +6,7 @@
 	// Handle sign out
 	async function handleSignOut() {
 		try {
-			await goto('/auth/signout');
+			await goto('/signout');
 		} catch (error) {
 			console.error('Error signing out:', error);
 		}
@@ -36,7 +36,8 @@
 						<h3 class="font-medium">Complete Session Object</h3>
 					</div>
 					<div class="p-4">
-						<pre class="bg-gray-100 p-3 rounded-sm text-sm block whitespace-pre-wrap overflow-x-auto">
+						<pre
+							class="bg-gray-100 p-3 rounded-sm text-sm block whitespace-pre-wrap overflow-x-auto">
 							{JSON.stringify(data.session, null, 2)}
 						</pre>
 					</div>

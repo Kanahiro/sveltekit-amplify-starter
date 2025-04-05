@@ -1,9 +1,9 @@
+import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types.js';
 
 export const load: LayoutServerLoad = async ({ locals: { session } }) => {
-	if (!session) {
-		// guard: hooks.server.ts handle only authenticated requests to this route.
-		return { session: null };
+	if (!session?.userSub) {
+		redirect(302, '/signin');
 	}
 
 	// you can get session data from event.locals in /private/*
