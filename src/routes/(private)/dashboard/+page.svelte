@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { signOut } from 'aws-amplify/auth';
 
 	let { data } = $props();
 
 	// Handle sign out
 	async function handleSignOut() {
-		const anchor = document.createElement('a');
-		anchor.href = '/signout';
-		anchor.click();
+		signOut();
 	}
 </script>
 
