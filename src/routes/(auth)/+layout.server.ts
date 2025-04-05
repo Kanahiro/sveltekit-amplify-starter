@@ -1,1 +1,1 @@
-// this is needed to ensure SSR
+export const ssr = false;
