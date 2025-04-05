@@ -5,11 +5,9 @@
 
 	// Handle sign out
 	async function handleSignOut() {
-		try {
-			await goto('/signout');
-		} catch (error) {
-			console.error('Error signing out:', error);
-		}
+		const anchor = document.createElement('a');
+		anchor.href = '/signout';
+		anchor.click();
 	}
 </script>
 
